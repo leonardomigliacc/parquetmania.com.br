@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parquet Mania – Pisos de Madeira Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    /* ───── Reset & Base ───── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brown-dark:  #2B1A0F;
+      --brown-mid:   #6B4226;
+      --tan:         #A07850;
+      --tan-light:   #C4A882;
+      --cream:       #F7F2EA;
+      --cream-dark:  #EDE4D6;
+      --white:       #FFFFFF;
+      --text-dark:   #1C1008;
+      --text-mid:    #5C4030;
+      --text-light:  #8C7060;
+      --accent:      #B8892A;
+      --header-h:    80px;
+      --radius:      4px;
+      --transition:  0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.15;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    .container {
+      width: min(1200px, 92%);
+      margin-inline: auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--tan);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--brown-mid); transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.7);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+
+    .btn-dark {
+      background: var(--brown-dark);
+      color: var(--white);
+    }
+    .btn-dark:hover { background: var(--brown-mid); transform: translateY(-2px); }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--brown-dark);
+      margin-bottom: 20px;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-light);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    /* ───── Topbar ───── */
+    .topbar {
+      background: var(--brown-dark);
+      color: rgba(255,255,255,0.8);
+      font-size: 0.78rem;
+      padding: 8px 0;
+    }
+    .topbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .topbar a { color: rgba(255,255,255,0.8); transition: color 0.2s; }
+    .topbar a:hover { color: var(--tan-light); }
+    .topbar-left { display: flex; gap: 20px; }
+    .topbar-right { display: flex; gap: 14px; }
+    .topbar-right a { font-size: 0.85rem; }
+
+    /* ───── Header ───── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--cream-dark);
+      height: var(--header-h);
+      transition: var(--transition);
+    }
+    header.scrolled { box-shadow: 0 4px 30px rgba(43,26,15,0.12); }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo img { height: 48px; width: auto; max-width: 220px; }
+    .logo-fallback {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--brown-dark);
+      line-height: 1;
+    }
+    .logo-fallback span { color: var(--accent); }
+
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-mid);
+      padding: 6px 14px;
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+    nav a:hover { color: var(--tan); background: var(--cream); }
+    nav a.active { color: var(--tan); }
+
+    .header-cta { margin-left: 16px; }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--brown-dark);
+      transition: var(--transition);
+    }
+
+    /* ───── Hero ───── */
+    .hero {
+      position: relative;
+      min-height: 78vh;
+      display: flex;
+      align-items: flex-start;
+      overflow: hidden;
+      background: var(--brown-dark);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/fundo.png') center 35%/cover no-repeat;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        rgba(43,26,15,0.88) 0%,
+        rgba(43,26,15,0.52) 55%,
+        rgba(43,26,15,0.70) 100%
+      );
+    }
+
+    /* Decorative wood grain lines */
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      opacity: 0.06;
+      background: repeating-linear-gradient(
+        2deg,
+        transparent,
+        transparent 40px,
+        rgba(196,168,130,0.8) 40px,
+        rgba(196,168,130,0.8) 41px
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 60px 0 60px;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1.5px;
+      background: var(--tan-light);
+    }
+    .hero-eyebrow span {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tan-light);
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4.2vw, 3.6rem);
+      color: var(--white);
+      max-width: 500px;
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--tan-light);
+    }
+
+    .hero-desc {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.75;
+      max-width: 400px;
+      margin-bottom: 36px;
+    }
+
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.45);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    .hero-scroll i { font-size: 1rem; }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+
+    /* ───── Marquee Strip ───── */
+    .marquee-strip {
+      background: var(--tan);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      padding-right: 60px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .marquee-item i { font-size: 0.65rem; color: rgba(255,255,255,0.6); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ───── Services ───── */
+    .services {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 64px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--cream);
+      cursor: pointer;
+      group: true;
+    }
+
+    .service-card-inner {
+      padding: 48px 36px;
+      height: 100%;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .service-card:hover .service-card-inner {
+      background: var(--brown-dark);
+      transform: translateY(-4px);
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--cream-dark);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .service-card:hover .service-icon {
+      background: var(--tan);
+    }
+    .service-icon i {
+      font-size: 1.4rem;
+      color: var(--tan);
+      transition: var(--transition);
+    }
+    .service-card:hover .service-icon i { color: var(--white); }
+
+    .service-card h3 {
+      font-size: 1.5rem;
+      color: var(--brown-dark);
+      transition: var(--transition);
+    }
+    .service-card:hover h3 { color: var(--white); }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.75;
+      transition: var(--transition);
+    }
+    .service-card:hover p { color: rgba(255,255,255,0.65); }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-top: auto;
+      transition: var(--transition);
+    }
+    .service-card:hover .service-link { color: var(--tan-light); }
+    .service-link i { transition: transform 0.25s; }
+    .service-card:hover .service-link i { transform: translateX(5px); }
+
+    /* ───── About ───── */
+    .about {
+      padding: 100px 0;
+      background: var(--cream);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-images {
+      position: relative;
+      height: 560px;
+    }
+
+    .about-img-main {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 75%;
+      height: 80%;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+
+    .about-img-accent {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 55%;
+      height: 55%;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 6px solid var(--cream);
+    }
+
+    .about-badge {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--brown-dark);
+      color: var(--white);
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 4px solid var(--cream);
+      z-index: 2;
+    }
+    .about-badge .years {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--tan-light);
+    }
+    .about-badge .years-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .about-content { padding-right: 20px; }
+
+    .about-text {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.85;
+      margin-bottom: 24px;
+    }
+
+    .about-checks {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .about-check {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+    }
+    .about-check i {
+      color: var(--accent);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    /* Image placeholders (shown when real images are missing) */
+    .img-placeholder {
+      background: linear-gradient(135deg, var(--cream-dark), var(--tan-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+    }
+    .img-placeholder i {
+      font-size: 3rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ───── Gallery ───── */
+    .gallery {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .gallery-header .section-subtitle { margin-inline: auto; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    /* Layout dos destaques */
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+
+    /* Overlay "+N fotos" */
+    .gallery-item--more .gallery-overlay {
+      opacity: 1;
+      background: rgba(43,26,15,0.72);
+      flex-direction: column;
+      gap: 10px;
+    }
+    .gallery-item--more .gallery-overlay i { font-size: 1.6rem; }
+    .gallery-item--more .gallery-overlay span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.03em;
+    }
+    .gallery-item--more:hover .gallery-overlay { background: rgba(43,26,15,0.85); }
+
+    .gallery-thumb {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: block;
+    }
+    .gallery-item:nth-child(1) .gallery-thumb { height: 564px; }
+    .gallery-item:nth-child(8) .gallery-thumb { height: 280px; }
+    .gallery-item:hover .gallery-thumb { transform: scale(1.06); }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(43,26,15,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay i { color: var(--white); font-size: 1.8rem; }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      background: rgba(0,0,0,0.92);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 2px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      color: rgba(255,255,255,0.7);
+      font-size: 2rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+    }
+    .lightbox-close:hover { color: var(--white); }
+    .lightbox-prev, .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.7);
+      font-size: 1.8rem;
+      cursor: pointer;
+      background: rgba(255,255,255,0.08);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.18); color: var(--white); }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+    .lightbox-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ───── Process ───── */
+    .process {
+      padding: 100px 0;
+      background: var(--brown-dark);
+    }
+
+    .process-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+    .process-header .section-label { color: var(--tan-light); }
+    .process-header .section-title { color: var(--white); }
+    .process-header .section-subtitle { color: rgba(255,255,255,0.6); margin-inline: auto; }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(12.5% + 18px);
+      right: calc(12.5% + 18px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--tan) 0%, rgba(196,168,130,0.2) 100%);
+    }
+
+    .process-step {
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .step-num {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 1.5px solid var(--tan);
+      background: var(--brown-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--tan);
+      position: relative;
+      z-index: 1;
+    }
+
+    .process-step h4 {
+      font-size: 1.25rem;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .process-step p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.75;
+    }
+
+/* ───── CTA Banner ───── */
+    .cta-banner {
+      padding: 90px 0;
+      background: var(--tan);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 20px,
+        rgba(255,255,255,0.04) 20px,
+        rgba(255,255,255,0.04) 21px
+      );
+    }
+
+    .cta-inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .cta-text h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .cta-text p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .cta-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--brown-dark);
+    }
+    .btn-white:hover { background: var(--cream); transform: translateY(-2px); }
+
+    .btn-outline-white {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.6);
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.12); border-color: var(--white); }
+
+    /* ───── Contact ───── */
+    .contact {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      max-width: 560px;
+    }
+
+    .contact-info { padding-top: 8px; }
+
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      margin-top: 36px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .contact-item-icon {
+      width: 46px;
+      height: 46px;
+      background: var(--cream);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-item-icon i {
+      color: var(--tan);
+      font-size: 1rem;
+    }
+
+    .contact-item-body { line-height: 1.5; }
+    .contact-item-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+    .contact-item-value {
+      font-size: 0.95rem;
+      color: var(--brown-dark);
+      font-weight: 500;
+    }
+    .contact-item-value a { color: var(--tan); transition: color 0.2s; }
+    .contact-item-value a:hover { color: var(--brown-mid); }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 40px;
+    }
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--cream-dark);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+    .social-link:hover {
+      background: var(--tan);
+      border-color: var(--tan);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+
+    /* ───── Footer ───── */
+    footer {
+      background: var(--brown-dark);
+      color: rgba(255,255,255,0.7);
+      padding-top: 72px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1.2fr;
+      gap: 48px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-brand p {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      margin: 20px 0 28px;
+    }
+
+    .footer-logo { margin-bottom: 4px; }
+    .footer-logo img { height: 48px; width: auto; max-width: 210px; background: rgba(255,255,255,0.08); border-radius: 6px; padding: 4px 8px; }
+    .footer-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--white);
+    }
+
+    .footer-col h5 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--tan-light);
+      margin-bottom: 20px;
+    }
+
+    .footer-links { display: flex; flex-direction: column; gap: 11px; }
+    .footer-links a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.65);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--tan-light); }
+
+    .footer-contact-list { display: flex; flex-direction: column; gap: 14px; }
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.85rem;
+    }
+    .footer-contact-item i {
+      color: var(--tan-light);
+      font-size: 0.9rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .footer-bottom a {
+      color: rgba(255,255,255,0.4);
+      transition: color 0.2s;
+    }
+    .footer-bottom a:hover { color: var(--tan-light); }
+
+    /* ───── WhatsApp Float ───── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 58px;
+      height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.6rem;
+      box-shadow: 0 6px 30px rgba(37,211,102,0.4);
+      z-index: 999;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 40px rgba(37,211,102,0.55);
+    }
+
+    /* ───── Mobile Menu ───── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: var(--white);
+      flex-direction: column;
+      padding: 28px 24px;
+    }
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 48px;
+    }
+
+    .mobile-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--brown-dark);
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mobile-nav a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--brown-dark);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--cream-dark);
+      transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--tan); }
+
+    .mobile-cta {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .mobile-cta .btn { justify-content: center; }
+
+    /* ───── Responsive ───── */
+    @media (max-width: 1024px) {
+      .services-header { grid-template-columns: 1fr; gap: 20px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 50px; }
+      .about-images { height: 400px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+      .gallery-item:nth-child(1) .gallery-thumb { height: 320px; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .process-steps::before { display: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --header-h: 64px; }
+      nav, .header-cta { display: none; }
+      .hamburger { display: flex; }
+      .services-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .contact-form { padding: 28px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .cta-inner { flex-direction: column; text-align: center; }
+      .cta-actions { justify-content: center; }
+      .topbar-left, .topbar-right { gap: 12px; font-size: 0.72rem; }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+      .gallery-item:nth-child(1) .gallery-thumb { height: 240px; }
+    }
+
+    /* ───── Animations ───── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up:nth-child(2) { transition-delay: 0.1s; }
+    .fade-up:nth-child(3) { transition-delay: 0.2s; }
+    .fade-up:nth-child(4) { transition-delay: 0.3s; }
+    .fade-up:nth-child(5) { transition-delay: 0.4s; }
+    .fade-up:nth-child(6) { transition-delay: 0.5s; }
+  </style>
+</head>
+<body>
+
+<!-- ── Topbar ── -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="tel:+551639165669"><i class="fa-solid fa-phone"></i> (16) 3916-5669</a>
+      <a href="tel:+5516991176032"><i class="fa-solid fa-mobile-screen"></i> (16) 9 9117-6032</a>
+      <a href="https://wa.me/5516991176032"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+    </div>
+    <div class="topbar-right">
+      <a href="https://www.instagram.com/parquetmania_?igsh=aTI0OXkxaWZnZGVo" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://wa.me/5516991176032" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- ── Header ── -->
+<header id="main-header">
+  <div class="container header-inner">
+    <a href="#" class="logo">
+      <img src="assets/logo.png" alt="Parquet Mania"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+      <span class="logo-fallback" style="display:none;">Parquet<span>Mania</span></span>
+    </a>
+
+    <nav>
+      <a href="#inicio" class="active">Início</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#quem-somos">Quem Somos</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+    <div class="header-cta">
+      <a href="https://wa.me/5516991176032?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento."
+         class="btn btn-primary" target="_blank" rel="noopener">
+        <i class="fa-brands fa-whatsapp"></i> Orçamento Grátis
+      </a>
+    </div>
+
+    <button class="hamburger" id="hamburger-btn" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── Mobile Menu ── -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-header">
+    <span class="logo-fallback">Parquet<span style="color:var(--accent)">Mania</span></span>
+    <button class="mobile-close" id="mobile-close-btn" aria-label="Fechar menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <nav class="mobile-nav">
+    <a href="#inicio">Início</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#quem-somos">Quem Somos</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#contato">Contato</a>
+  </nav>
+  <div class="mobile-cta">
+    <a href="https://wa.me/5516991176032" class="btn btn-primary" target="_blank" rel="noopener">
+      <i class="fa-brands fa-whatsapp"></i> Solicitar Orçamento
+    </a>
+    <a href="tel:+5516991176032" class="btn btn-outline" style="color:var(--brown-dark); border-color:var(--cream-dark);">
+      <i class="fa-solid fa-phone"></i> Ligar Agora
+    </a>
+  </div>
+</div>
+
+<!-- ── Hero ── -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="container hero-content">
+    <div class="hero-eyebrow">
+      <span>Especialistas em Pisos de Madeira</span>
+    </div>
+    <h1>Beleza e nobreza<br />do <em>piso de madeira</em><br />na sua casa</h1>
+    <p class="hero-desc">
+      Instalação, restauração e manutenção de pisos de madeira e parquet
+      com acabamento impecável e materiais premium de alto padrão.
+    </p>
+    <div class="hero-actions">
+      <a href="https://wa.me/5516991176032?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento."
+         class="btn btn-primary" target="_blank" rel="noopener">
+        <i class="fa-brands fa-whatsapp"></i> Solicitar Orçamento
+      </a>
+      <a href="#servicos" class="btn btn-outline">
+        Nossos Serviços <i class="fa-solid fa-arrow-down"></i>
+      </a>
+    </div>
+  </div>
+
+
+  <div class="hero-scroll">
+    <span>Rolar</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- ── Marquee ── -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <!-- duplicated for seamless loop -->
+    <span class="marquee-item">Instalação de Parquet <i class="fa-solid fa-diamond"></i></span>
+    <span class="marquee-item">Restauração de Pisos <i class="fa-solid fa-diamond"></i></span>
+    <span class="marquee-item">Deck de Madeira <i class="fa-solid fa-diamond"></i></span>
+    <span class="marquee-item">Raspagem sem Pó <i class="fa-solid fa-diamond"></i></span>
+    <span class="marquee-item">Tingimento de Piso <i class="fa-solid fa-diamond"></i></span>
+    <span class="marquee-item">Laminados e Vinílicos <i class="fa-solid fa-diamond"></i></span>
+    <span class="marquee-item">Instalação de Parquet <i class="fa-solid fa-diamond"></i></span>
+    <span class="marquee-item">Restauração de Pisos <i class="fa-solid fa-diamond"></i></span>
+    <span class="marquee-item">Deck de Madeira <i class="fa-solid fa-diamond"></i></span>
+    <span class="marquee-item">Raspagem sem Pó <i class="fa-solid fa-diamond"></i></span>
+    <span class="marquee-item">Tingimento de Piso <i class="fa-solid fa-diamond"></i></span>
+    <span class="marquee-item">Laminados e Vinílicos <i class="fa-solid fa-diamond"></i></span>
+  </div>
+</div>
+
+<!-- ── Services ── -->
+<section class="services" id="servicos">
+  <div class="container">
+    <div class="services-header">
+      <div>
+        <span class="section-label">O que fazemos</span>
+        <h2 class="section-title">Serviços especializados<br />em pisos de madeira</h2>
+      </div>
+      <p class="section-subtitle">
+        Da instalação à restauração completa, entregamos resultados que
+        superam expectativas com qualidade e acabamento impecável.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-card-inner">
+          <div class="service-icon"><i class="fa-solid fa-hammer"></i></div>
+          <h3>Instalação de Parquet</h3>
+          <p>Instalação profissional de parquet e piso de madeira maciço com diferentes padrões de assentamento.</p>
+          <a href="#contato" class="service-link">Saiba mais <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-card-inner">
+          <div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <h3>Restauração e Raspagem</h3>
+          <p>Recuperamos pisos antigos ou danificados com raspagem de alta tecnologia — sem poeira e sem sujeira.</p>
+          <a href="#contato" class="service-link">Saiba mais <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-card-inner">
+          <div class="service-icon"><i class="fa-solid fa-paintbrush"></i></div>
+          <h3>Tingimento e Verniz</h3>
+          <p>Renovamos a aparência do seu piso com tingimentos personalizados e vernizes de alta durabilidade.</p>
+          <a href="#contato" class="service-link">Saiba mais <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-card-inner">
+          <div class="service-icon"><i class="fa-solid fa-tree"></i></div>
+          <h3>Deck de Madeira</h3>
+          <p>Instalação de decks externos e internos para áreas de lazer, sacadas e jardins com madeiras tratadas.</p>
+          <a href="#contato" class="service-link">Saiba mais <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-card-inner">
+          <div class="service-icon"><i class="fa-solid fa-layer-group"></i></div>
+          <h3>Piso Laminado</h3>
+          <p>Venda e instalação de pisos laminados e vinílicos com variedade de espessuras, texturas e acabamentos.</p>
+          <a href="#contato" class="service-link">Saiba mais <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-card-inner">
+          <div class="service-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Manutenção Preventiva</h3>
+          <p>Cuidados periódicos que preservam a beleza e prolongam a vida útil do seu piso de madeira.</p>
+          <a href="#contato" class="service-link">Saiba mais <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── About ── -->
+<section class="about" id="quem-somos">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-images">
+        <!-- Replace src with real photos -->
+        <div class="about-img-main img-placeholder" style="position:absolute;top:0;left:0;width:75%;height:80%;">
+          <i class="fa-solid fa-image"></i>
+        </div>
+        <div class="about-img-accent img-placeholder" style="position:absolute;bottom:0;right:0;width:55%;height:55%;border:6px solid var(--cream);">
+          <i class="fa-solid fa-image"></i>
+        </div>
+        <div class="about-badge">
+          <span class="years">30+</span>
+          <span class="years-label">anos de<br/>experiência</span>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <span class="section-label">Quem Somos</span>
+        <h2 class="section-title">Uma história de excelência que começou na Itália</h2>
+        <p class="about-text">
+          A <strong>Parquet Mania</strong> nasceu na Itália, berço mundial da arte em pisos de madeira.
+          Por mais de 20 anos em solo italiano, construímos um portfólio de alto prestígio atendendo
+          instituições renomadas como a <strong>Università Bocconi</strong> em Milão, edifícios históricos
+          e espaços corporativos de grande envergadura — onde a exigência por qualidade não admite compromisso.
+        </p>
+        <p class="about-text">
+          Trazendo toda essa expertise europeia para o Brasil, nos estabelecemos em <strong>Ribeirão Preto</strong>
+          e logo conquistamos os projetos mais exigentes da cidade. Entre nossos clientes estão o
+          <strong>Ribeirão Shopping</strong>, o <strong>Shopping Santa Úrsula</strong> e os condomínios
+          de alto padrão <strong>Country Village</strong>, <strong>Alphaville</strong> e <strong>Ipês</strong> —
+          referências de sofisticação em Ribeirão Preto.
+        </p>
+        <div class="about-checks">
+          <div class="about-check"><i class="fa-solid fa-check"></i> Origem italiana com técnica europeia certificada</div>
+          <div class="about-check"><i class="fa-solid fa-check"></i> Mais de 30 anos de experiência — 20 deles na Itália</div>
+          <div class="about-check"><i class="fa-solid fa-check"></i> Referência em shoppings e condomínios premium</div>
+          <div class="about-check"><i class="fa-solid fa-check"></i> Orçamento gratuito e sem compromisso</div>
+          <div class="about-check"><i class="fa-solid fa-check"></i> Garantia em todos os serviços realizados</div>
+        </div>
+        <a href="#contato" class="btn btn-dark">Fale Conosco</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Gallery ── -->
+<section class="gallery" id="galeria">
+  <div class="container">
+    <div class="gallery-header">
+      <span class="section-label">Nossos Trabalhos</span>
+      <h2 class="section-title">Galeria de projetos</h2>
+      <p class="section-subtitle">Cada ambiente é uma obra única. Confira alguns dos nossos projetos mais recentes.</p>
+    </div>
+
+    <div class="gallery-grid" id="gallery-grid">
+      <div class="gallery-item" data-index="0">
+        <img src="assets/galeria/g01.png" alt="Projeto 1" class="gallery-thumb" />
+        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+      <div class="gallery-item" data-index="1">
+        <img src="assets/galeria/g02.png" alt="Projeto 2" class="gallery-thumb" />
+        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+      <div class="gallery-item" data-index="2">
+        <img src="assets/galeria/g03.png" alt="Projeto 3" class="gallery-thumb" />
+        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+      <div class="gallery-item" data-index="3">
+        <img src="assets/galeria/g04.png" alt="Projeto 4" class="gallery-thumb" />
+        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+      <div class="gallery-item gallery-item--more" data-index="4">
+        <img src="assets/galeria/g05.png" alt="Projeto 5" class="gallery-thumb" />
+        <div class="gallery-overlay">
+          <i class="fa-solid fa-images"></i>
+          <span>+7 fotos</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lb-close"><i class="fa-solid fa-xmark"></i></button>
+      <button class="lightbox-prev" id="lb-prev"><i class="fa-solid fa-chevron-left"></i></button>
+      <img src="" alt="" id="lb-img" />
+      <button class="lightbox-next" id="lb-next"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="lightbox-counter" id="lb-counter"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Process ── -->
+<section class="process">
+  <div class="container">
+    <div class="process-header">
+      <span class="section-label">Como Trabalhamos</span>
+      <h2 class="section-title">Do orçamento à entrega final</h2>
+      <p class="section-subtitle">Um processo simples e transparente para garantir que o seu projeto seja realizado com excelência.</p>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step fade-up">
+        <div class="step-num">01</div>
+        <h4>Visita Técnica</h4>
+        <p>Agendamos uma visita gratuita para avaliar o ambiente e entender suas necessidades.</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="step-num">02</div>
+        <h4>Orçamento Detalhado</h4>
+        <p>Apresentamos uma proposta completa com materiais, prazos e valores sem surpresas.</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="step-num">03</div>
+        <h4>Execução do Projeto</h4>
+        <p>Equipe especializada realiza o serviço com precisão, cuidado e limpeza total do ambiente.</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="step-num">04</div>
+        <h4>Entrega e Garantia</h4>
+        <p>Entregamos o ambiente impecável com certificado de garantia e suporte pós-obra.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CTA Banner ── -->
+<section class="cta-banner">
+  <div class="container cta-inner">
+    <div class="cta-text">
+      <h2>Transforme seu espaço com<br />a beleza do piso de madeira</h2>
+      <p>Solicite seu orçamento gratuito hoje mesmo. Atendemos Ribeirão Preto e toda a região.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="https://wa.me/5516991176032?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20gratuito."
+         class="btn btn-white" target="_blank" rel="noopener">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+      </a>
+      <a href="#contato" class="btn btn-outline-white">Formulário de Contato</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ── -->
+<section class="contact" id="contato">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="section-label">Fale Conosco</span>
+        <h2 class="section-title">Entre em contato e peça seu orçamento</h2>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="contact-item-body">
+              <div class="contact-item-label">Localização</div>
+              <div class="contact-item-value">Ribeirão Preto, SP</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="contact-item-body">
+              <div class="contact-item-label">WhatsApp</div>
+              <div class="contact-item-value">
+                <a href="https://wa.me/5516991176032">(16) 9 9117-6032</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="contact-item-body">
+              <div class="contact-item-label">Telefone Fixo</div>
+              <div class="contact-item-value">
+                <a href="tel:+551639165669">(16) 3916-5669</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fa-regular fa-clock"></i></div>
+            <div class="contact-item-body">
+              <div class="contact-item-label">Horário de Atendimento</div>
+              <div class="contact-item-value">Seg – Sex: 8h às 18h<br/>Sáb: 8h às 13h</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/5516991176032" class="social-link" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="assets/logo.png" alt="Parquet Mania"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <span class="footer-logo-text" style="display:none;">ParquetMania</span>
+        </div>
+        <p>Com raízes na Itália e mais de 30 anos de experiência — sendo mais de 20 em solo italiano — somos referência em instalação e restauração de pisos de madeira em Ribeirão Preto e região.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" style="border-color:rgba(255,255,255,0.15); color:rgba(255,255,255,0.5);" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/5516991176032" class="social-link" style="border-color:rgba(255,255,255,0.15); color:rgba(255,255,255,0.5);" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Serviços</h5>
+        <ul class="footer-links">
+          <li><a href="#servicos">Instalação de Parquet</a></li>
+          <li><a href="#servicos">Restauração e Raspagem</a></li>
+          <li><a href="#servicos">Tingimento e Verniz</a></li>
+          <li><a href="#servicos">Deck de Madeira</a></li>
+          <li><a href="#servicos">Piso Laminado</a></li>
+          <li><a href="#servicos">Manutenção Preventiva</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Navegação</h5>
+        <ul class="footer-links">
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#quem-somos">Quem Somos</a></li>
+          <li><a href="#galeria">Galeria de Fotos</a></li>
+          <li><a href="#contato">Contato</a></li>
+          <li><a href="#contato">Solicitar Orçamento</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Contato</h5>
+        <ul class="footer-contact-list">
+          <li class="footer-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Ribeirão Preto, SP</span>
+          </li>
+          <li class="footer-contact-item">
+            <i class="fa-brands fa-whatsapp"></i>
+            <a href="https://wa.me/5516991176032" style="color:rgba(255,255,255,0.65);">(16) 9 9117-6032</a>
+          </li>
+          <li class="footer-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <a href="tel:+551639165669" style="color:rgba(255,255,255,0.65);">(16) 3916-5669</a>
+          </li>
+          <li class="footer-contact-item">
+            <i class="fa-solid fa-mobile-screen"></i>
+            <a href="tel:+5516991176032" style="color:rgba(255,255,255,0.65);">(16) 9 9117-6032</a>
+          </li>
+          <li class="footer-contact-item">
+            <i class="fa-regular fa-clock"></i>
+            <span>Seg–Sex 8h–18h · Sáb 8h–13h</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2024 Parquet Mania – Todos os direitos reservados.</span>
+      <div style="display:flex;gap:20px;">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── WhatsApp Float ── -->
+<a href="https://wa.me/5516991176032?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento."
+   class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat no WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<script>
+  /* ── Header scroll effect ── */
+  const header = document.getElementById('main-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  /* ── Mobile menu ── */
+  const hamburger = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileClose = document.getElementById('mobile-close-btn');
+
+  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  /* ── Active nav on scroll ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  /* ── Fade-up on scroll ── */
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  fadeEls.forEach(el => fadeObserver.observe(el));
+
+  /* ── Counter animation ── */
+  const counters = document.querySelectorAll('[data-count]');
+  const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = +el.dataset.count;
+      const suffix = el.dataset.suffix || (target > 100 ? '+' : (target === 98 ? '%' : '+'));
+      let start = 0;
+      const step = target / 60;
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) {
+          el.textContent = target + suffix;
+          clearInterval(timer);
+        } else {
+          el.textContent = Math.floor(start) + suffix;
+        }
+      }, 20);
+      counterObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
+
+
+  /* ── Lightbox ── */
+  const allImages = [
+    'assets/galeria/g01.png','assets/galeria/g02.png','assets/galeria/g03.png',
+    'assets/galeria/g04.png','assets/galeria/g05.png','assets/galeria/g06.png',
+    'assets/galeria/g07.png','assets/galeria/g08.png','assets/galeria/g09.png',
+    'assets/galeria/g10.png','assets/galeria/g11.png','assets/galeria/g12.png'
+  ];
+  const lightbox  = document.getElementById('lightbox');
+  const lbImg     = document.getElementById('lb-img');
+  const lbCounter = document.getElementById('lb-counter');
+  let current = 0;
+
+  function openLightbox(idx) {
+    current = idx;
+    lbImg.src = allImages[current];
+    lbCounter.textContent = `${current + 1} / ${allImages.length}`;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function navigate(dir) {
+    current = (current + dir + allImages.length) % allImages.length;
+    lbImg.src = allImages[current];
+    lbCounter.textContent = `${current + 1} / ${allImages.length}`;
+  }
+
+  document.querySelectorAll('#gallery-grid .gallery-item').forEach(item => {
+    item.addEventListener('click', () => openLightbox(+item.dataset.index));
+  });
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-prev').addEventListener('click', () => navigate(-1));
+  document.getElementById('lb-next').addEventListener('click', () => navigate(1));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigate(-1);
+    if (e.key === 'ArrowRight') navigate(1);
+  });
+
+  /* ── Smooth scroll for anchor links ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const offset = target.getBoundingClientRect().top + window.scrollY - 90;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
