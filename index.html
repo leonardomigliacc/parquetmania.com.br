@@ -150,8 +150,8 @@
       height: 100%;
     }
 
-    .logo { display: flex; align-items: center; gap: 10px; background: rgba(247,242,234,0.92); border-radius: 8px; padding: 4px 12px 4px 6px; }
-    .logo img { height: 48px; width: auto; max-width: 210px; display: block; }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo img { height: 64px; width: auto; max-width: 260px; display: block; }
     .logo-fallback {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.6rem;
@@ -1965,12 +1965,11 @@
   }
 
   function initLogo() {
-    const imgs = [document.querySelector('.logo img'), document.querySelector('.footer-logo img')];
-    imgs.forEach(img => {
-      if (!img) return;
-      if (img.complete && img.naturalWidth > 0) processLogoForDark(img);
-      else img.addEventListener('load', () => processLogoForDark(img));
-    });
+    // Only process footer logo (dark background); header logo stays as-is (white header)
+    const footerImg = document.querySelector('.footer-logo img');
+    if (!footerImg) return;
+    if (footerImg.complete && footerImg.naturalWidth > 0) processLogoForDark(footerImg);
+    else footerImg.addEventListener('load', () => processLogoForDark(footerImg));
   }
   initLogo();
 </script>
