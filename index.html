@@ -1947,11 +1947,14 @@
         const r = d[i], g = d[i+1], b = d[i+2];
         const lum = r * 0.299 + g * 0.587 + b * 0.114;
         if (r > 200 && g > 190 && b > 180) {
-          // near-white → transparent (smooth edge)
+          // near-white → transparent
           const w = Math.min(r, g, b);
           d[i+3] = w > 240 ? 0 : Math.round(d[i+3] * (1 - (w - 200) / 40));
+        } else if (lum < 90) {
+          // dark text/outlines → white
+          d[i] = 255; d[i+1] = 255; d[i+2] = 255;
         }
-        // dark pixels (text/outlines) and brown/tan → keep as-is
+        // brown/tan → keep as-is
       }
       ctx.putImageData(id, 0, 0);
       img.src = canvas.toDataURL('image/png');
